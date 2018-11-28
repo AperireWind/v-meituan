@@ -1,0 +1,62 @@
+a{
+  text-decoration: none;
+  color: black;
+}
+.nav{
+  width: 100%;
+  height: 40px;
+  display: flex;
+  border-bottom: 1px solid #e4e4e4;
+  position: relative;
+}
+.nav .nav-box{
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  flex: 1;
+  position: relative;
+  text-align: center;
+  color: #666666;
+}
+/* 滑动效果 */
+.nav .nav-border{
+  width: 30px;
+  height: 2px;
+  background-color: #2294ff;
+  display: inline-block;
+  position: absolute;
+  bottom: 0;
+}
+.nav .nav-box .nav-item .line{
+  width: 30px;
+  height: 2px;
+  display: inline-block;
+  position: absolute;
+  
+  left: 50%;
+  bottom: 0;
+  background-color: #ffbb22;
+  transform: translateX(-50%);
+}
+.nav-active{
+  color: #ffbb22;
+}
+
+/* 动画效果 */
+.nav .slide-enter-active{
+  animation: slide-in 0.5s;
+}
+.nav .slide-leave-active{
+  animation: slide-in 0.5s reverse;
+}
+@keyframes slide-in{
+  0%{
+    transform: scale(0);
+  }
+  50%{
+    transform: scale(1.5);
+  }
+  100%{
+    transform: scale(1);
+  }
+}

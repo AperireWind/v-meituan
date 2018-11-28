@@ -1,0 +1,129 @@
+<template>
+  <section class="todomvc">
+    <!-- 头部初始内容 -->
+    <header class="header">
+      <h1>todos</h1>
+      <input type="text" placeholder="请输入内容..." autofocus="autofocus"
+       v-model="input_content"
+       v-on:keyup.enter="add_input_list"
+       >
+    </header>
+    <section class="main" v-show="todo_lists.length">
+      <!-- 全选箭头 -->
+      <div class="toggle-all" @click="selectAll()"></div>
+      <!-- 列表内容 -->
+      <ul class="toggle-list"
+      
+       >
+        <li class="todo" 
+         @mouseover="m_over(item)"
+         @mouseleave="m_leave(item)"
+          v-for="(item,index) in v_all"
+          :key="index"
+         >
+          <div class="view">
+            <span class="toggle" :class="{'toggle_a': item.checked}"   @click="my_selected(item)"></span>
+            <label for="">{{item.content}}</label>
+            <button class="destory"
+             v-show="item.closed"
+             @click="del_input_list(index)"
+             >
+             X
+             </button>
+          </div>
+          <!-- <input type="text" class="edit"> -->
+        </li>
+      </ul>
+    </section>
+    <!-- 底部内容 -->
+    <footer class="footer" v-show="todo_lists.length">
+      <span class="todo-count">{{count}} {{it}} left</span>
+      <ul class="filters">
+        <li v-for="(item,index) in todo_views"
+        :key="index"
+        >
+        <a href="#"
+         :class="item.cls"
+         @click="viewAll(index)"
+         >
+         {{item.name}}
+         </a>
+        </li>
+      </ul>
+      <button class="clear-completed" @click="clearAll()">Clear completed</button>
+    </footer>
+
+  </section>
+</template>
+
+<script>
+export default {
+  data(){
+    return{
+      input_content:'',
+      todo_lists: [],
+      it: 'item',
+      todo_count: 0,
+      todo_views: [
+        {name:"All",cls:"border",key: 0},
+        {name:"Active",cls:"",key: 1},
+        {name:"Completed",cls:"",key: 2}
+        ],
+      v_all: [],
+      v_active: [],
+      v_completed: [],
+      count: 0
+    }
+  },
+  computed:{
+    its(){
+      if (this.todo_count>1) {
+        return 'items'
+      }else{
+        return 'item'
+      }
+    }
+  },
+  methods:{
+    add_input_list(){
+      if (this.input_content.trim() === '') {
+        return
+      }
+      this.todo_lists.push({
+        id: this.todo_lists.length,
+        content: this.input_content,
+        checked: false,
+        closed: false,
+      })
+      this.input_content = ''
+
+      console.log('todo_lists: %o', this.todo_lists)
+    },
+    m_over(item){
+      item.closed = true
+    },
+    m_leave(item){
+      item.closed = false
+
+    },
+    del_input_list(index){
+      this.todo_lists.splice(index, 1)
+     
+    },
+    my_selected(item){
+     item.checked = !item.checked
+      
+    },
+    selectAll(){
+    },
+    viewAll(index){
+    },
+    clearAll(){
+    }
+  }
+}
+</script>
+
+<style lang="less">
+@import url(todoMVC.less);
+</style>
