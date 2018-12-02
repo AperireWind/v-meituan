@@ -3,7 +3,7 @@
     <!-- 头部初始内容 -->
     <header class="header">
       <h1>todos</h1>
-      <input type="text" placeholder="请输入内容..." autofocus="autofocus" v-model="input_content" v-on:keyup.enter="add_input_list" >
+      <input type="text" placeholder="请输入内容...111" autofocus="autofocus" v-model="input_content" v-on:keyup.enter="add_input_list" >
     </header>
     <section class="main" v-show="todo_count">
       <!-- 全选箭头 -->
